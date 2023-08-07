@@ -10,7 +10,7 @@ bot = telebot.TeleBot(TOKEN)
 def start(message):
     bot.reply_to(message, 'مرحبًا! أنا روبوت أذكار وأوقات الصلاة وأدعية. ارسل /azkar للحصول على أذكار، /dua للحصول على أدعية، و /praytimes للحصول على أوقات الصلاة.')
 
-@bot.message_handler(commands=['praytimes'])
+@bot.message_handler(commands=['pr'])
 def pray_times(message):
     # Replace these prayer times with actual prayer times for Baghdad
     prayer_times = "أوقات الصلاة في بغداد:\nفجر: 03:45 AM\nشروق الشمس: 05:18 AM\nظهر: 12:15 PM\nعصر: 03:57 PM\nمغرب: 07:00 PM\nعشاء: 08:28 PM"
