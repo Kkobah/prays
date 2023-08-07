@@ -13,13 +13,13 @@ def start(message):
 @bot.message_handler(commands=['praytimes'])
 def pray_times(message):
     # Replace these prayer times with actual prayer times for Baghdad
-    prayer_times = "أوقات الصلاة في بغداد:\nفجر: 04:30 AM\nشروق الشمس: 05:45 AM\nظهر: 12:15 PM\nعصر: 04:00 PM\nمغرب: 07:30 PM\nعشاء: 09:00 PM"
+    prayer_times = "أوقات الصلاة في بغداد:\nفجر: 03:45 AM\nشروق الشمس: 05:18 AM\nظهر: 12:15 PM\nعصر: 03:57 PM\nمغرب: 07:00 PM\nعشاء: 08:28 PM"
     bot.reply_to(message, prayer_times)
 
 @bot.message_handler(commands=['azkar'])
 def send_azkar(message):
     # Replace these with actual azkar
-    azkar = ["سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", "لا إِلَهَ إِلَّا اللهُ وَحْدَهُ لا شَرِيكَ لَهُ"]
+    azkar = ["رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً" ,"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", "لا إِلَهَ إِلَّا اللهُ وَحْدَهُ لا شَرِيكَ لَهُ"]
     selected_azkar = random.choice(azkar)
     bot.reply_to(message, selected_azkar)
 
