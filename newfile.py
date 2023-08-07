@@ -16,14 +16,14 @@ def pray_times(message):
     prayer_times = "أوقات الصلاة في بغداد:\nفجر: 03:45 AM\nشروق الشمس: 05:18 AM\nظهر: 12:15 PM\nعصر: 03:57 PM\nمغرب: 07:00 PM\nعشاء: 08:28 PM"
     bot.reply_to(message, prayer_times)
 
-@bot.message_handler(commands=['azkar'])
+@bot.message_handler(commands=['a'])
 def send_azkar(message):
     # Replace these with actual azkar
     azkar = ["رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً" ,"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", "لا إِلَهَ إِلَّا اللهُ وَحْدَهُ لا شَرِيكَ لَهُ"]
     selected_azkar = random.choice(azkar)
     bot.reply_to(message, selected_azkar)
 
-@bot.message_handler(commands=['dua'])
+@bot.message_handler(commands=['d'])
 def send_dua(message):
     # Replace these with actual duas
     duas = ["رَبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ", "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ زَوَالِ نِعْمَتِكَ وَتَحَوُّلِ عَافِيَتِكَ وَفُجَاءَةِ نِقْمَتِكَ وَجَمِيعِ سَخَطِكَ"]
