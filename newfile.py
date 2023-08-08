@@ -1,30 +1,45 @@
-import random
 import telebot
-# Replace 'YOUR_TOKEN' with your actual Telegram Bot API token
-TOKEN = '6357249652:AAGrVUHOKYWcLrBJr8KsZ4-cbX4BwKQYmmc'
+
+# Replace 'YOUR_BOT_TOKEN' with your actual bot token
+TOKEN = '6409039633:AAEGXtx-M3m6D4148STKnx07TCt3Vt5zUyw'
+
 bot = telebot.TeleBot(TOKEN)
+
+muted_users = set()
+
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, 'مرحبًا! أنا روبوت أذكار وأوقات الصلاة وأدعية. ارسل /azkar للحصول على أذكار، /dua للحصول على أدعية، و /pr للحصول على أوقات الصلاة.')
-@bot.message_handler(commands=['pr'])
-def pray_times(message):
-    # Replace these prayer times with actual prayer times for Baghdad
-    prayer_times = "أوقات الصلاة في بغداد:\nفجر: 03:45 AM\nشروق الشمس: 05:18 AM\nظهر: 12:15 PM\nعصر: 03:57 PM\nمغرب: 07:00 PM\nعشاء: 08:28 PM"
-    bot.reply_to(message, prayer_times)
+    bot.reply_to(message, "Hello! I'm your group protection bot. Use /mute, /unmute, and /kick commands to manage users.")
 
-@bot.message_handler(commands=['azkar'])
-@bot.message_handler(commands=['a'])
-def send_azkar(message):
-    # Replace these with actual azkar
-    azkar = ["رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً" ,"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", "لا إِلَهَ إِلَّا اللهُ وَحْدَهُ لا شَرِيكَ لَهُ"]
-    selected_azkar = random.choice(azkar)
-    bot.reply_to(message, selected_azkar)
+@bot.message_handler(commands=['mute'])
+def mute(message):
+    if message.reply_to_message and message.reply_to_message.from_user:
+        user_id = message.reply_to_message.from_user.id
+        muted_users.add(user_id)
+        bot.reply_to(message, "this is zrab.")
+    else:
+        bot.reply_to(message, "Reply to a user's message to mute them.")
 
-@bot.message_handler(commands=['dua'])
-@bot.message_handler(commands=['d'])
-def send_dua(message):
-    # Replace these with actual duas
-    duas = ["رَبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ", "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ زَوَالِ نِعْمَتِكَ وَتَحَوُّلِ عَافِيَتِكَ وَفُجَاءَةِ نِقْمَتِكَ وَجَمِيعِ سَخَطِكَ"]
-    selected_dua = random.choice(duas)
-    bot.reply_to(message, selected_dua)
+@bot.message_handler(commands=['unmute'])
+def unmute(message):
+    if message.reply_to_message and message.reply_to_message.from_user:
+        user_id = message.reply_to_message.from_user.id
+        muted_users.discard(user_id)
+        bot.reply_to(message, "this is zrab.")
+    else:
+        bot.reply_to(message, "Reply to a user's message to unmute them.")
+
+@bot.message_handler(commands=['kick'])
+def kick(message):
+    if message.reply_to_message and message.reply_to_message.from_user:
+        user_id = message.reply_to_message.from_user.id
+        bot.kick_chat_member(message.chat.id, user_id)
+        bot.reply_to(message, "User kicked from the group.")
+    else:
+        bot.reply_to(message, "Reply to a user's message to kick them.")
+
+@bot.message_handler(func=lambda message: message.from_user.id in muted_users)
+def mute_handler(message):
+    bot.delete_message(message.chat.id, message.message_id)
+
 bot.polling()
