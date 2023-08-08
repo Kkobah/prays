@@ -9,19 +9,19 @@ bot = telebot.TeleBot(TOKEN)
 
 # Dictionary to store prayer times
 prayer_times_dict = {
-    "فجر": "04:30 AM",
-    "شروق الشمس": "05:45 AM",
-    "ظهر": "12:15 PM",
-    "عصر": "04:00 PM",
-    "مغرب": "07:30 PM",
-    "عشاء": "09:00 PM"
+    "Fajr": "04:30 AM",
+    "Sunrise": "05:45 AM",
+    "Dhuhr": "12:15 PM",
+    "Asr": "04:00 PM",
+    "Maghrib": "07:30 PM",
+    "Isha": "09:00 PM"
 }
 
 # List to store azkar
-azkar_list = ["سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", "لا إِلَهَ إِلَّا اللهُ وَحْدَهُ لا شَرِيكَ لَهُ"]
+azkar_list = ["Subhanallah wa bihamdihi", "La ilaha illallah wahdahu la sharika lahu"]
 
 # List to store duas
-dua_list = ["رَبِّ اغْفِرْ وَارْحَمْ وَأَنتَ خَيْرُ الرَّاحِمِينَ", "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ زَوَالِ نِعْمَتِكَ وَتَحَوُّلِ عَافِيَتِكَ وَفُجَاءَةِ نِقْمَتِكَ وَجَمِيعِ سَخَطِكَ"]
+dua_list = ["Rabbi-ghfir warham wa anta khayrur-rahimeen", "Allahumma inni a'oodhu bika min zawali ni'matika wa tahawwuli 'afiyatika wa fuja'ati niqmatika wa jami'i sakhatika"]
 
 # Function to display the prayer times keyboard
 def show_prayer_times_keyboard(message):
@@ -29,7 +29,7 @@ def show_prayer_times_keyboard(message):
     for prayer in prayer_times_dict:
         button = types.KeyboardButton(prayer)
         keyboard.add(button)
-    bot.send_message(message.chat.id, "اختر وقت الصلاة:", reply_markup=keyboard)
+    bot.send_message(message.chat.id, "Select a prayer time:", reply_markup=keyboard)
 
 # Command to display prayer times keyboard
 @bot.message_handler(commands=['praytimes'])
@@ -41,14 +41,14 @@ def pray_times(message):
 def add_azkar(message):
     azkar_text = message.text.split(' ', 1)[1]
     azkar_list.append(azkar_text)
-    bot.reply_to(message, "تمت إضافة الذكر بنجاح!")
+    bot.reply_to(message, "Zikr added successfully!")
 
 # Command to add dua
 @bot.message_handler(commands=['adddua'])
 def add_dua(message):
     dua_text = message.text.split(' ', 1)[1]
     dua_list.append(dua_text)
-    bot.reply_to(message, "تمت إضافة الدعاء بنجاح!")
+    bot.reply_to(message, "Dua added successfully!")
 
 # Handler for prayer time buttons
 @bot.message_handler(func=lambda message: message.text in prayer_times_dict)
@@ -72,7 +72,7 @@ def send_dua(message):
 # Start command
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, 'مرحبًا! أنا روبوت أذكار وأوقات الصلاة وأدعية. ارسل /azkar للحصول على أذكار، /dua للحصول على أدعية، و /praytimes للحصول على أوقات الصلاة.')
+    bot.reply_to(message, "Welcome! I'm a bot for Azkar, Prayer Times, and Duas. Use /azkar for Azkar, /dua for Duas, and /praytimes for Prayer Times.")
 
 # Polling loop
 bot.polling()
