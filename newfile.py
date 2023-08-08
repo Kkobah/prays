@@ -16,7 +16,7 @@ def mute(message):
     if message.reply_to_message and message.reply_to_message.from_user:
         user_id = message.reply_to_message.from_user.id
         muted_users.add(user_id)
-        bot.reply_to(message, "this is zrab.")
+        bot.reply_to(message, "تمام.")
     else:
         bot.reply_to(message, "Reply to a user's message to mute them.")
 
@@ -25,7 +25,7 @@ def unmute(message):
     if message.reply_to_message and message.reply_to_message.from_user:
         user_id = message.reply_to_message.from_user.id
         muted_users.discard(user_id)
-        bot.reply_to(message, "this is zrab.")
+        bot.reply_to(message, "تمام.")
     else:
         bot.reply_to(message, "Reply to a user's message to unmute them.")
 
