@@ -1,4 +1,4 @@
-import telebot
+خوش خوشimport telebot
 
 TOKEN = '6573645457:AAHTK0Id4tYBIerhP50zZCt07tf1RzYsYQo'
 bot = telebot.TeleBot(TOKEN)
